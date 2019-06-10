@@ -3,7 +3,7 @@
 let xVals = [];
 let yVals = [];
 
-const addPointIfUserClickedOnEmptyArea = () => {
+const addPointBecauseUserClickedOnEmptyArea = () => {
         //let x = map(mouseX, 0, width, 0 , 1);
         //let y = map(mouseY, 0, width, 1, 0);
         let x = map(mouseX, 0, width, 0 , 1);
@@ -11,6 +11,7 @@ const addPointIfUserClickedOnEmptyArea = () => {
         xVals.push(x);
         yVals.push(y);
         optimized = false;
+        console.log('new point at ' + mouseX + ' ,  ' + mouseY);
 }
 
 const drawPointsUserAdded = () => {

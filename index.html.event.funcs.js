@@ -1,5 +1,8 @@
 'use strict';
 
+const doTiming = (checkbox) => {
+    timeTheOptimization = checkbox.checked;
+}
 
 const doResetInitialValues = () => {
     optimizeStartTime = new Date().getTime();

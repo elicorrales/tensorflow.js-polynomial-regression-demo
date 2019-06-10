@@ -3,6 +3,7 @@
 let optimizeStartTime = new Date().getTime();
 let optimizeEndTime = new Date().getTime();
 let optimized = false;
+let timeTheOptimization = false;
 
 let reset = false;
 
@@ -30,6 +31,12 @@ let prevMomentum = momentum;
 const setupRegressionLineStuff = () => {
 
     if (tfA === undefined || reset === true) {
+        if (tfA !== undefined) {
+            tfA.dispose();
+            tfB.dispose();
+            tfC.dispose();
+            tfD.dispose();
+        }
         // the regression line has to start somewhere
         tfA = tf.variable(tf.scalar(random(1)));
         tfB = tf.variable(tf.scalar(random(1)));
@@ -53,6 +60,7 @@ const seeIfNewOptimizerRequiredBecauseLearningRateOrMomentumChanged = () => {
     learningRate = parseFloat(learningRate);
     momentum = parseFloat(momentum);
     if (prevLearningRate !== learningRate) {
+        if (optimizer !== undefined) optimizer.dispose();
         switch (useWhichOptimizer) {
             case '0': optimizer = tf.train.sgd(learningRate); break;
             case '1': optimizer = tf.train.momentum(learningRate,momentum); break;
@@ -89,7 +97,7 @@ const guessAndMinimizeLoss = () => {
         //console.log(Math.abs(prevA - A[0]), ' ', Math.abs(prevB - B[0]), ' ' , Math.abs(prevC - C[0]), ' ', Math.abs(prevD - D[0]));
         let optimizedValue = 0.0007;
         if (useWhichFormula === '3') optimizedValue = 0.0004;
-        if ( (Math.abs(prevA - A[0]) < optimizedValue) && (Math.abs(prevB - B[0]) < optimizedValue) 
+        if ( timeTheOptimization && (Math.abs(prevA - A[0]) < optimizedValue) && (Math.abs(prevB - B[0]) < optimizedValue) 
                 && (Math.abs(prevC - C[0]) < optimizedValue) && (Math.abs(prevD - D[0]) < optimizedValue)) {
 
             optimized = true;

@@ -6,7 +6,7 @@ function mousePressed() {
 
     if (mouseX>0 && mouseX<width && mouseY>0 && mouseY<height) {
         console.log('user clicked inside canvas');
-        addPointIfUserClickedOnEmptyArea();
+        addPointBecauseUserClickedOnEmptyArea();
         //console.table(mathPoints);
     }
 }
@@ -18,7 +18,10 @@ function mouseReleased() {
 
 
 function mouseDragged() {
-    //console.log('dragged');
+    console.log('dragged');
+    if (mouseX>0 && mouseX<width && mouseY>0 && mouseY<height) {
+        addPointBecauseUserClickedOnEmptyArea();
+    }
 
 }
 
